@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".Preguntas">
+
+    <Button
+        android:id="@+id/r1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="RESPUESTA #1"
+        app:layout_constraintBottom_toTopOf="@+id/r2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contenedor" />
+
+    <Button
+        android:id="@+id/r2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="RESPUESTA #2"
+        app:layout_constraintBottom_toTopOf="@+id/r3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r1" />
+
+    <Button
+        android:id="@+id/r3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="RESPUESTA #3"
+        app:layout_constraintBottom_toTopOf="@+id/r4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r2" />
+
+    <Button
+        android:id="@+id/r4"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="RESPUESTA #4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r3" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/contenedor"
+        android:layout_width="394dp"
+        android:layout_height="309dp"
+        android:background="#FEEC82"
+        app:layout_constraintBottom_toTopOf="@+id/r1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
