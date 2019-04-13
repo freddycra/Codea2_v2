@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="#1abc9c"
     tools:context=".Preguntas">
 
     <Button
         android:id="@+id/r1"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="@color/Jugar"
         android:text="RESPUESTA #1"
+        android:textColor="@android:color/white"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/r2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -20,9 +23,12 @@
 
     <Button
         android:id="@+id/r2"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="@color/Preguntas"
         android:text="RESPUESTA #2"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/r3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -31,9 +37,12 @@
 
     <Button
         android:id="@+id/r3"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="@color/Puntaje"
         android:text="RESPUESTA #3"
+        android:textColor="@android:color/white"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/r4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -42,9 +51,12 @@
 
     <Button
         android:id="@+id/r4"
-        android:layout_width="300dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:background="@color/Video"
         android:text="RESPUESTA #4"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -53,22 +65,37 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/contenedor"
-        android:layout_width="394dp"
-        android:layout_height="309dp"
-        android:background="#FEEC82"
+        android:layout_width="367dp"
+        android:layout_height="279dp"
+        android:background="#ecf0f1"
         app:layout_constraintBottom_toTopOf="@+id/r1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/code"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="1dp" />
+            android:text="¿SON CSS Y HTML LENGUAJES?"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="175dp"
+            android:layout_height="199dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:srcCompat="@drawable/code" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
