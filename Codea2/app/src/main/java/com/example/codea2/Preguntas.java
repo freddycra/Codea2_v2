@@ -7,7 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Preguntas extends AppCompatActivity {
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+    int contador = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +38,44 @@ public class Preguntas extends AppCompatActivity {
 
     } // Fin del Oncreate de la Actividad 02
 
+    private void escribirPregunta(String id, String pregunta, String respuesta, List<Opcion> opciones) {
+        Pregunta p = new Pregunta(id,pregunta,respuesta,opciones);
+        myRef.child(String.valueOf(contador)).setValue(p);
+    }
+
 
     public void OnclickDelButton(int ref) {
 
-        // Ejemplo  OnclickDelButton(R.id.MiButton);
-        // 1 Doy referencia al Button
         View view =findViewById(ref);
         Button miButton = (Button) view;
-        //  final String msg = miButton.getText().toString();
-        // 2.  Programar el evento onclick
         miButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
 
                     case R.id.r1:
-                        Mensaje("Implementar Button1");
+                        // Write a message to the database
+
+
+                        ArrayList<Opcion> ops = new ArrayList<>();
+                        ops.add(new Opcion("1","opcion1"));
+                        ops.add(new Opcion("2","opcion2"));
+                        ops.add(new Opcion("3","opcion3"));
+                        ops.add(new Opcion("4","opcion4"));
+                        contador = contador+1;
+                        escribirPregunta(String.valueOf(contador), "pregunta "+contador,"cualquiera",ops);
+                        myRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                //MensajeOK(dataSnapshot.toString());
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        Mensaje("Writing in DB");
 
                         break;
 
