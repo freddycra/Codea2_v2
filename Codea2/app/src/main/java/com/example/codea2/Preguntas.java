@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +36,7 @@ public class Preguntas extends AppCompatActivity {
         OnclickDelButton(R.id.r3);
         OnclickDelButton(R.id.r4);
 
+        LeeObjetoEnFirebase("1");
 
     } // Fin del Oncreate de la Actividad 02
 
@@ -42,6 +44,32 @@ public class Preguntas extends AppCompatActivity {
         Pregunta p = new Pregunta(id,pregunta,respuesta,opciones);
         myRef.child(String.valueOf(contador)).setValue(p);
     }
+    public void LeeObjetoEnFirebase(String nombreobj) {
+//        myRef = database.getReference();
+        myRef.child(nombreobj).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Pregunta p = dataSnapshot.getValue(Pregunta.class);
+                TextView Mi_textview = (TextView) findViewById(R.id.textViewPregunta);
+                Button Mi_button = (Button) findViewById(R.id.r1);
+                Mi_button.setText(p.getOpciones().get(0).getValor());
+                Mi_button = (Button) findViewById(R.id.r2);
+                Mi_button.setText(p.getOpciones().get(1).getValor());
+                Mi_button = (Button) findViewById(R.id.r3);
+                Mi_button.setText(p.getOpciones().get(2).getValor());
+                Mi_button = (Button) findViewById(R.id.r4);
+                Mi_button.setText(p.getOpciones().get(3).getValor());
+                Mi_textview.setText(p.getPregunta());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
 
     public void OnclickDelButton(int ref) {
