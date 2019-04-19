@@ -44,6 +44,7 @@ public class Preguntas extends AppCompatActivity {
         Pregunta p = new Pregunta(id,pregunta,respuesta,opciones);
         myRef.child(String.valueOf(contador)).setValue(p);
     }
+
     public void LeeObjetoEnFirebase(String nombreobj) {
 //        myRef = database.getReference();
         myRef.child(nombreobj).addValueEventListener(new ValueEventListener() {
@@ -83,8 +84,6 @@ public class Preguntas extends AppCompatActivity {
 
                     case R.id.r1:
                         // Write a message to the database
-
-
                         ArrayList<Opcion> ops = new ArrayList<>();
                         ops.add(new Opcion("1","opcion1"));
                         ops.add(new Opcion("2","opcion2"));
