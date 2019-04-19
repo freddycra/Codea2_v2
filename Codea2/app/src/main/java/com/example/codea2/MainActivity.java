@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Button Jugar = (Button) findViewById(R.id.jugar);
         Button Cuenta = (Button) findViewById(R.id.cuenta);
         Button video = (Button) findViewById(R.id.video);
+        Button mis_preguntas = (Button) findViewById(R.id.mispreguntas);
 
         Jugar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -47,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=mOpCL3ggpCQ")));
+            }
+        });
+        mis_preguntas.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                startActivity(new Intent(getApplicationContext(), misPreguntas.class));
             }
         });
     } // Fin del Oncreate de la Actividad 01

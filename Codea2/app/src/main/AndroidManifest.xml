@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Desarrolladores"></activity>
+        <activity android:name=".crearPregunta"></activity>
+        <activity
+            android:name=".misPreguntas"
+            android:label="@string/title_activity_mis_preguntas"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Desarrolladores" />
         <activity
             android:name=".Act02"
             android:label="@string/title_activity_act02"

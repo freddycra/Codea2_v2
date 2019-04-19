@@ -40,10 +40,6 @@ public class Preguntas extends AppCompatActivity {
 
     } // Fin del Oncreate de la Actividad 02
 
-    private void escribirPregunta(String id, String pregunta, String respuesta, List<Opcion> opciones) {
-        Pregunta p = new Pregunta(id,pregunta,respuesta,opciones);
-        myRef.child(String.valueOf(contador)).setValue(p);
-    }
 
     public void LeeObjetoEnFirebase(String nombreobj) {
 //        myRef = database.getReference();
@@ -83,26 +79,7 @@ public class Preguntas extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.r1:
-                        // Write a message to the database
-                        ArrayList<Opcion> ops = new ArrayList<>();
-                        ops.add(new Opcion("1","opcion1"));
-                        ops.add(new Opcion("2","opcion2"));
-                        ops.add(new Opcion("3","opcion3"));
-                        ops.add(new Opcion("4","opcion4"));
-                        contador = contador+1;
-                        escribirPregunta(String.valueOf(contador), "pregunta "+contador,"cualquiera",ops);
-                        myRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                //MensajeOK(dataSnapshot.toString());
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                        Mensaje("Writing in DB");
+                        Mensaje("Implementar Button1");
 
                         break;
 
