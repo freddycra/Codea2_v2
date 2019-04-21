@@ -80,6 +80,9 @@ public class crearPregunta extends AppCompatActivity {
         botonCrear();
 
 
+        mProgress = new ProgressDialog(this);
+        p = new Pregunta();
+
 
         // MULTIMEDIA START
 
@@ -139,7 +142,11 @@ public class crearPregunta extends AppCompatActivity {
 
                 //Se crea la pregunta
                 EditText etPregunta = (EditText) findViewById(R.id.editTextPregunta);
-                escribirPregunta(String.valueOf(VariablesGlobales.getInstance().getContador()), etPregunta.getText().toString(),String.valueOf(correcta),ops);
+                escribirPregunta(String.valueOf(VariablesGlobales.getInstance().getContador()),
+                        etPregunta.getText().toString(),
+                        String.valueOf(correcta),
+                        ops);
+
                 Mensaje("Se ha agregado la pregunta");
                 finish();
 
