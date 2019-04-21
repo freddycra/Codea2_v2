@@ -23,9 +23,7 @@ import java.util.List;
 
 public class crearPregunta extends AppCompatActivity {
     //TODO poner estas variables en una clase VariablesGlobales
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
-    int contador = 1;
+
     int correcta = 1; //Marca la opcion que es correcta
 
     @Override
@@ -36,18 +34,7 @@ public class crearPregunta extends AppCompatActivity {
         numeroOpciones();
         opcionCorrecta();
         botonCrear();
-        myRef.child("cantidad").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                contador = dataSnapshot.getValue(Integer.class);
-                Mensaje("Este es el contador"+contador);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
 
@@ -76,10 +63,17 @@ public class crearPregunta extends AppCompatActivity {
 
                 //Se aumenta el ID de la pregunta
                 //Se puede hacer poniendo un documento la cantidad de preguntas
-                contador = contador+1;
+                VariablesGlobales.getInstance().setContador(VariablesGlobales.getInstance().getContador()+1);
+
                 //Se crea la pregunta
                 EditText etPregunta = (EditText) findViewById(R.id.editTextPregunta);
-                escribirPregunta(String.valueOf(contador), etPregunta.getText().toString(),String.valueOf(correcta),0,"",ops);
+                escribirPregunta(String.valueOf(VariablesGlobales.getInstance().getContador()),
+                        etPregunta.getText().toString(),
+                        String.valueOf(correcta),
+                        0,
+                        "",
+                        ops);
+
                 Mensaje("Se ha agregado la pregunta");
                 finish();
 
@@ -88,8 +82,8 @@ public class crearPregunta extends AppCompatActivity {
     }
 
     private void escribirPregunta(String id, String pregunta, String respuesta, int tipo, String url, List<Opcion> opciones) {
-        myRef.child(String.valueOf(contador)).setValue(new Pregunta(id,pregunta,respuesta,tipo,url,opciones));
-        myRef.child("cantidad").setValue(contador);
+        VariablesGlobales.getInstance().getMyRef().child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(new Pregunta(id,pregunta,respuesta,tipo,url,opciones));
+        VariablesGlobales.getInstance().getMyRef().child("cantidad").setValue(VariablesGlobales.getInstance().getContador());
     }
 
     private void opcionCorrecta(){
