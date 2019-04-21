@@ -139,7 +139,11 @@ public class crearPregunta extends AppCompatActivity {
 
                 //Se crea la pregunta
                 EditText etPregunta = (EditText) findViewById(R.id.editTextPregunta);
-                escribirPregunta(String.valueOf(contador), etPregunta.getText().toString(),String.valueOf(correcta),ops);
+                escribirPregunta(String.valueOf(VariablesGlobales.getInstance().getContador()),
+                        etPregunta.getText().toString(),
+                        String.valueOf(correcta),
+                        ops);
+
                 Mensaje("Se ha agregado la pregunta");
                 finish();
 
@@ -152,7 +156,7 @@ public class crearPregunta extends AppCompatActivity {
         p.setPregunta(pregunta);
         p.setResputesta(respuesta);
         p.setOpciones(opciones);
-        VariablesGlobales.getInstance().getMyRef().child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(new Pregunta(id,pregunta,respuesta,tipo,url,opciones));
+        VariablesGlobales.getInstance().getMyRef().child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(p);
         VariablesGlobales.getInstance().getMyRef().child("cantidad").setValue(VariablesGlobales.getInstance().getContador());
     }
 
