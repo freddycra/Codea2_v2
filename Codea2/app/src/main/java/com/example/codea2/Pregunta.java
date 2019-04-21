@@ -53,4 +53,20 @@ public class Pregunta {
     public void setOpciones(List<Opcion> opciones) {
         this.opciones = opciones;
     }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
