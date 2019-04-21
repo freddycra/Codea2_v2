@@ -26,13 +26,13 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/una" />
+            app:srcCompat="@drawable/freddy" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:text="Alfreddo Alvarado González\n\t\t\t\t0000000"
+            android:text="Freddy Alvarado Murillo\n\t\t\t\t\t402360734"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -95,13 +95,13 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/una" />
+            app:srcCompat="@drawable/kristyn" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:text="Kristyn Tenorio Alvarado - 00000"
+            android:text="Kristyn Tenorio Rodriguez\n\t\t\t\t\t117180070"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
