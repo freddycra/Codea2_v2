@@ -26,7 +26,7 @@ public class crearPregunta extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     int contador = 1;
-    int correcta = 1;
+    int correcta = 1; //Marca la opcion que es correcta
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,13 @@ public class crearPregunta extends AppCompatActivity {
         numeroOpciones();
         opcionCorrecta();
         botonCrear();
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.child("cantidad").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //MensajeOK(dataSnapshot.toString());
+                contador = dataSnapshot.getValue(Integer.class);
+                Mensaje("Este es el contador"+contador);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -77,6 +79,8 @@ public class crearPregunta extends AppCompatActivity {
                 //Se crea la pregunta
                 EditText etPregunta = (EditText) findViewById(R.id.editTextPregunta);
                 escribirPregunta(String.valueOf(contador), etPregunta.getText().toString(),String.valueOf(correcta),ops);
+                Mensaje("Se ha agregado la pregunta");
+                finish();
 
             }
         });
@@ -154,10 +158,14 @@ public class crearPregunta extends AppCompatActivity {
                     findViewById(R.id.switch4).setVisibility(View.VISIBLE);
                 }
                 if (rb2.isChecked()) {
+                    //TODO revisar que el switch funcione
                     findViewById(R.id.op3).setVisibility(View.INVISIBLE);
                     findViewById(R.id.switch3).setVisibility(View.INVISIBLE);
                     findViewById(R.id.op4).setVisibility(View.INVISIBLE);
                     findViewById(R.id.switch4).setVisibility(View.INVISIBLE);
+                    Switch s1 = (Switch) findViewById(R.id.switch1);
+                    s1.setChecked(true);
+                    opcionCorrecta();
                 }
             }
         });
