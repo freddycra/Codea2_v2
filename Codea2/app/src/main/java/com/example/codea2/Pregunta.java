@@ -6,14 +6,19 @@ public class Pregunta {
     private String id;
     private String pregunta;
     private String resputesta;
+    private int tipo; // 0-Nada 1-Imagen 2-Audio 3-Video
+    private String url;
+    //TODO agregar datos del jugador
     private List<Opcion> opciones;
 
     Pregunta(){}
 
-    Pregunta(String id, String pregunta, String respuesta,List opciones){
+    Pregunta(String id, String pregunta, String respuesta, int tipo, String url, List opciones){
         this.id = id;
         this.pregunta= pregunta;
         this.resputesta = respuesta;
+        this.tipo = tipo;
+        this.url = url;
         this.opciones = opciones;
     }
 
