@@ -8,11 +8,4 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_mis_preguntas">misPreguntas</string>
-    <string name="email_id">email id</string>
-    <string name="password">password</string>
-    <string name="login">Login</string>
-    <string name="failed">Authentication failed</string>
-    <string name="image">image</string>
-    <string name="create_a_new_account">Create a new Account!</string>
-
 </resources>

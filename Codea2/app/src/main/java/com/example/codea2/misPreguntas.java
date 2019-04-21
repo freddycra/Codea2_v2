@@ -24,6 +24,7 @@ public class misPreguntas extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), crearPregunta.class));
             }
         });
+        //TODO mostrar las preguntas que ha hecho el usuario
     }
 
 }
