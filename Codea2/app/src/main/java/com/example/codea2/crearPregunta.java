@@ -2,6 +2,9 @@ package com.example.codea2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -48,6 +51,25 @@ public class crearPregunta extends AppCompatActivity {
 
             }
         });
+
+
+
+        Button MiButton = (Button) findViewById(R.id.addButton);
+        registerForContextMenu(MiButton);
+
+        MiButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+
+            public void onClick(View arg0) {
+
+                openContextMenu(findViewById(R.id.addButton));
+
+            }
+
+        });
+
+
     }
 
     private void botonCrear(){
@@ -170,6 +192,46 @@ public class crearPregunta extends AppCompatActivity {
             }
         });
     }
+
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        switch (v.getId()) {
+            case R.id.addButton:
+                MenuInflater infla =getMenuInflater();
+                infla.inflate(R.menu.add, menu);
+                break;
+
+            default:  Mensaje("No clasificado"); break;
+        }
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        int opcionseleccionada = item.getItemId();
+        switch (opcionseleccionada) {
+            case R.id.imagenItem:
+                Mensaje("Negro");
+                break;
+            case R.id.audioItem:
+                Mensaje("Rojo");
+                break;
+            case R.id.videoItem:
+                Mensaje("Verde");
+                break;
+
+            default:  Mensaje("No clasificado"); break;
+        }
+
+        return true;
+    }
+
 
     public void Mensaje(String msg){
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};

@@ -3,6 +3,9 @@ package com.example.codea2;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ public class Preguntas extends AppCompatActivity {
         OnclickDelButton(R.id.r2);
         OnclickDelButton(R.id.r3);
         OnclickDelButton(R.id.r4);
+
+
 
         LeeObjetoEnFirebase("1");
 
@@ -101,6 +106,9 @@ public class Preguntas extends AppCompatActivity {
             }// fin del onclick
         });
     }// fin de OnclickDelButton
+
+
+
 
     public void Mensaje(String msg){ Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show(); };
 
