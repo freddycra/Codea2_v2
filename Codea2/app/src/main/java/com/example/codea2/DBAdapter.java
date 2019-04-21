@@ -173,7 +173,7 @@ public class DBAdapter {
         }
     }
 
-    //---Recuperamos todo los datos---
+    //---Recuperamos todos los datos---
     public String ObtenerTodosLosRegistros()
     {
         Cursor c = db.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_ATRIBUTO01,
