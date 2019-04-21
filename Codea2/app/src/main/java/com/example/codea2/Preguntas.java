@@ -6,15 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,15 +21,9 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Preguntas extends AppCompatActivity {
@@ -278,8 +268,9 @@ public class Preguntas extends AppCompatActivity {
 
     public void verificaRespuesta(boolean correcta){
         if(correcta){
-            TextView tv = (TextView) findViewById(R.id.puntos);
-            tv.setText(String.valueOf(++puntos));
+            TextView tv = (TextView) findViewById(R.id.TextViewPuntos);
+            puntos = puntos + 1;
+            tv.setText(String.valueOf(puntos));
             System.out.println("Puntos: "+puntos);
             leerPregunta();
         }else{
@@ -302,7 +293,7 @@ public class Preguntas extends AppCompatActivity {
         builder1.setPositiveButton("Si",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        String mensaje = "Hola! Mira mi nuevo resultado en Codea2:  " + String.valueOf(VariablesGlobales.getInstance().getContador() + "pts!");
+                        String mensaje = "Hola! Mira mi nuevo resultado en Codea2:  " + puntos + "pts!";
                         compartirResultados(mensaje);
                         finish();
                     } });
