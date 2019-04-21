@@ -72,6 +72,8 @@ public class crearPregunta extends AppCompatActivity {
 
     }
 
+
+    //TODO validar que los campos no esten vacios
     private void botonCrear(){
         Button MiButton = (Button) findViewById(R.id.btnCrear);
         MiButton.setOnClickListener(new View.OnClickListener(){
@@ -95,12 +97,11 @@ public class crearPregunta extends AppCompatActivity {
                 }
 
                 //Se aumenta el ID de la pregunta
-                //TODO cambiar el contador por el numero de docuemntos de la base
                 //Se puede hacer poniendo un documento la cantidad de preguntas
                 contador = contador+1;
                 //Se crea la pregunta
                 EditText etPregunta = (EditText) findViewById(R.id.editTextPregunta);
-                escribirPregunta(String.valueOf(contador), etPregunta.getText().toString(),String.valueOf(correcta),ops);
+                escribirPregunta(String.valueOf(contador), etPregunta.getText().toString(),String.valueOf(correcta),0,"",ops);
                 Mensaje("Se ha agregado la pregunta");
                 finish();
 
@@ -108,8 +109,9 @@ public class crearPregunta extends AppCompatActivity {
         });
     }
 
-    private void escribirPregunta(String id, String pregunta, String respuesta, List<Opcion> opciones) {
-        myRef.child(String.valueOf(contador)).setValue(new Pregunta(id,pregunta,respuesta,opciones));
+    private void escribirPregunta(String id, String pregunta, String respuesta, int tipo, String url, List<Opcion> opciones) {
+        myRef.child(String.valueOf(contador)).setValue(new Pregunta(id,pregunta,respuesta,tipo,url,opciones));
+        myRef.child("cantidad").setValue(contador);
     }
 
     private void opcionCorrecta(){
@@ -180,7 +182,6 @@ public class crearPregunta extends AppCompatActivity {
                     findViewById(R.id.switch4).setVisibility(View.VISIBLE);
                 }
                 if (rb2.isChecked()) {
-                    //TODO revisar que el switch funcione
                     findViewById(R.id.op3).setVisibility(View.INVISIBLE);
                     findViewById(R.id.switch3).setVisibility(View.INVISIBLE);
                     findViewById(R.id.op4).setVisibility(View.INVISIBLE);
