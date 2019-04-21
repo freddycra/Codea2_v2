@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Jugar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
+                //TODO validacion si el numero de preguntas es 0
              Intent intent = new Intent(getApplicationContext(), Preguntas.class);
              startActivity(intent);
             }
