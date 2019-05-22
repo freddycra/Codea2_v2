@@ -13,6 +13,7 @@ public class VariablesGlobales {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     int contador = 1;
+    Pregunta auxPregunta;
 
     private static VariablesGlobales instance = null;
 
@@ -33,9 +34,16 @@ public class VariablesGlobales {
         this.contador = contador;
     }
 
+    public Pregunta getAuxPregunta() {
+        return auxPregunta;
+    }
+
+    public void setAuxPregunta(Pregunta auxPregunta) {
+        this.auxPregunta = auxPregunta;
+    }
 
     protected VariablesGlobales() {
-        myRef.child("cantidad").addValueEventListener(new ValueEventListener() {
+        myRef.child("preguntas").child("cantidad").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contador = dataSnapshot.getValue(Integer.class);

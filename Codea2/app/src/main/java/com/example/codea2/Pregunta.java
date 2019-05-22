@@ -69,4 +69,14 @@ public class Pregunta {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder r = new StringBuilder();
+        r.append("ID: "+id+"\n");
+        r.append(pregunta+"\n");
+        r.append(opciones.toString());
+        r.append("\nRespuesta: "+resputesta+"\n\n");
+        return r.toString();
+    }
 }
