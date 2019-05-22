@@ -13,6 +13,7 @@ public class VariablesGlobales {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     int contador = 1;
+    Pregunta auxPregunta;
     private static Usuario usuarioGlobal = new Usuario();
 
     private static VariablesGlobales instance = null;
@@ -40,6 +41,13 @@ public class VariablesGlobales {
 
     public static void setUsuarioGlobal(Usuario usuarioGlobal) {
         VariablesGlobales.usuarioGlobal = usuarioGlobal;
+    }
+    public Pregunta getAuxPregunta() {
+        return auxPregunta;
+    }
+
+    public void setAuxPregunta(Pregunta auxPregunta) {
+        this.auxPregunta = auxPregunta;
     }
 
     protected VariablesGlobales() {
