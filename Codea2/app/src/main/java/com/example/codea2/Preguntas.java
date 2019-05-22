@@ -81,7 +81,7 @@ public class Preguntas extends AppCompatActivity {
     }
 
     public void LeeObjetoEnFirebase(String nombreobj) {
-        VariablesGlobales.getInstance().getMyRef().child(nombreobj).addValueEventListener(new ValueEventListener() {
+        VariablesGlobales.getInstance().getMyRef().child("preguntas").child(nombreobj).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

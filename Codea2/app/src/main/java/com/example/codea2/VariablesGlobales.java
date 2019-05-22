@@ -14,6 +14,7 @@ public class VariablesGlobales {
     DatabaseReference myRef = database.getReference();
     int contador = 1;
     Pregunta auxPregunta;
+    private static Usuario usuarioGlobal = new Usuario();
 
     private static VariablesGlobales instance = null;
 
@@ -34,6 +35,13 @@ public class VariablesGlobales {
         this.contador = contador;
     }
 
+    public static Usuario getUsuarioGlobal() {
+        return usuarioGlobal;
+    }
+
+    public static void setUsuarioGlobal(Usuario usuarioGlobal) {
+        VariablesGlobales.usuarioGlobal = usuarioGlobal;
+    }
     public Pregunta getAuxPregunta() {
         return auxPregunta;
     }
@@ -45,7 +53,7 @@ public class VariablesGlobales {
     protected VariablesGlobales() {
         myRef.child("preguntas").child("cantidad").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) { //El contador se obtiene desde la base, el último número
                 contador = dataSnapshot.getValue(Integer.class);
                 System.out.println("Este es el contador"+contador);
             }

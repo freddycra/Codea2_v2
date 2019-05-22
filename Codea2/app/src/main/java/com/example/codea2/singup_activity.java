@@ -18,6 +18,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class singup_activity extends AppCompatActivity {
     private EditText name, email_id, passwordcheck;
@@ -25,12 +28,16 @@ public class singup_activity extends AppCompatActivity {
     private static final String TAG = "";
     private ProgressBar progressBar;
 
-
+    private Usuario u;
+    private String nickname;
+    private String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singup_activity);
 
+
+        u = new Usuario();
 
         TextView btnSignUp = (TextView) findViewById(R.id.login_page);
 
@@ -54,7 +61,7 @@ public class singup_activity extends AppCompatActivity {
         ahsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = email_id.getText().toString();
+                email = email_id.getText().toString();
                 String password = passwordcheck.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
@@ -77,6 +84,21 @@ public class singup_activity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
+
+                                    u.setCorreo(email);
+                                    String email2 = email;
+                                    String correo = email2.replace(".", "");
+                                    String [] aux = correo.split("@");
+                                    nickname = aux[0];
+                                    u.setNickname(nickname);
+                                    u.setNombre("indefinido");
+                                    u.setApellido("indefinido");
+                                    u.setEdad(0);
+                                    u.setUbicacion("indefinido");
+                                    VariablesGlobales.getInstance().getMyRef().child("usuarios").child(nickname).setValue(u);
+                                    VariablesGlobales.getInstance().setUsuarioGlobal(u);//La variable global es el usuario nuevo
+
+
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent intent = new Intent(singup_activity.this, MainActivity.class);
                                     startActivity(intent);
