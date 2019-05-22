@@ -27,6 +27,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.IOException;
 
 public class singin_activity extends AppCompatActivity {
 
@@ -39,6 +44,10 @@ public class singin_activity extends AppCompatActivity {
     private final static int RC_SIGN_IN = 123;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth.AuthStateListener mAuthListner;
+    private String email;
+    private Usuario u;
+    private Usuario recibido;
+    private String nickname;
 
     @Override
     protected void onStart() {
@@ -55,6 +64,8 @@ public class singin_activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        u = new Usuario();
+        recibido = new Usuario();
         //check the current user
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(singin_activity.this, MainActivity.class));
@@ -92,7 +103,7 @@ public class singin_activity extends AppCompatActivity {
         ahlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString();
+                email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Please enter email id", Toast.LENGTH_SHORT).show();
@@ -117,6 +128,35 @@ public class singin_activity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // there was an error
                                     Log.d(TAG, "signInWithEmail:success");
+                                    u.setCorreo(email);
+                                    String email2 = email;
+                                    String correo = email2.replace(".", "");
+                                    String [] aux = correo.split("@");
+                                    nickname = aux[0];
+                                    u.setNickname(nickname);
+                                    u.setNombre("indefinido");
+                                    u.setApellido("indefinido");
+                                    u.setEdad(0);
+                                    u.setUbicacion("indefinido");
+
+                                    VariablesGlobales.getInstance().getMyRef().child("usuarios").child(nickname).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            recibido = dataSnapshot.getValue(Usuario.class);
+                                            if(recibido==null){
+                                                VariablesGlobales.getInstance().getMyRef().child("usuarios").child(nickname).setValue(u);
+                                                VariablesGlobales.getInstance().setUsuarioGlobal(u);//La variable global es el usuario nuevo
+                                            }else{
+                                                VariablesGlobales.getInstance().setUsuarioGlobal(recibido);//La variable global es el usuario recibido
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                     Intent intent = new Intent(singin_activity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();

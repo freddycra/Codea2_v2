@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         video.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=mOpCL3ggpCQ")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=LOuSxeO2kro&t=6s")));
             }
         });
         mis_preguntas.setOnClickListener(new View.OnClickListener(){
