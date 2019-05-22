@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 public class Preguntas extends AppCompatActivity {
@@ -274,6 +275,7 @@ public class Preguntas extends AppCompatActivity {
             System.out.println("Puntos: "+puntos);
             leerPregunta();
         }else{
+            // Enviar a FireBase.
             DialogSiNO_01();
         }
     }
