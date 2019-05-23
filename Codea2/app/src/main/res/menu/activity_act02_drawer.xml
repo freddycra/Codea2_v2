@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="INICIO" />
         <item
-            android:id="@+id/jugar"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="JUGAR" />
-        <item
             android:id="@+id/mi_puntaje"
             android:icon="@drawable/ic_menu_gallery"
             android:title="PUNTAJES" />

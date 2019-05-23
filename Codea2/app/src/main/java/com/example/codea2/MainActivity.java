@@ -132,14 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
                 mAuth.signOut();
-                /*
-                singup.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        mAuth.signOut();
-                    }
-                });*/
                 break;
             default:  Mensaje("No clasificado"); break;
         }

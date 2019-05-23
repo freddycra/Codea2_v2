@@ -190,13 +190,13 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/Puntaje"
-        <!-- android:background="@color/Jugar" -->
         android:text="crear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        <!-- android:background="@color/Jugar" -->
 
     <Button
         android:id="@+id/addButton"

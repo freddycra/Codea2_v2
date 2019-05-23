@@ -53,6 +53,7 @@ public class misPreguntas extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
         getSupportActionBar().setTitle("Mis Preguntas - " + mAuth.getCurrentUser().getEmail());
 

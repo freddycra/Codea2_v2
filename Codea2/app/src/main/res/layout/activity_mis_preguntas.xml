@@ -20,7 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_mis_preguntas" />
+    <include
+        layout="@layout/content_mis_preguntas"
+        android:background="@color/Puntaje" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
