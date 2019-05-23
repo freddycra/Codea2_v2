@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 //TODO validacion si el numero de preguntas es 0
-             Intent intent = new Intent(getApplicationContext(), Preguntas.class);
-             startActivity(intent);
+             startActivity(new Intent(getApplicationContext(), Preguntas.class));
             }
         });
 
@@ -70,14 +69,13 @@ public class MainActivity extends AppCompatActivity {
         Cuenta.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
-             Intent intent2 = new Intent(getApplicationContext(), Act02.class);
-             startActivity(intent2);
+             startActivity(new Intent(getApplicationContext(), Act02.class));
             }
         });
         video.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=mOpCL3ggpCQ")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=LOuSxeO2kro&t=6s")));
             }
         });
         mis_preguntas.setOnClickListener(new View.OnClickListener(){

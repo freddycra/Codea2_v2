@@ -44,6 +44,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class crearPregunta extends AppCompatActivity {
     //TODO poner estas variables en una clase VariablesGlobales
@@ -157,8 +158,8 @@ public class crearPregunta extends AppCompatActivity {
         p.setPregunta(pregunta);
         p.setResputesta(respuesta);
         p.setOpciones(opciones);
-        VariablesGlobales.getInstance().getMyRef().child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(p);
-        VariablesGlobales.getInstance().getMyRef().child("cantidad").setValue(VariablesGlobales.getInstance().getContador());
+        VariablesGlobales.getInstance().getMyRef().child("preguntas").child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(p);//Acá se llama al contador de preguntas.......
+        VariablesGlobales.getInstance().getMyRef().child("preguntas").child("cantidad").setValue(VariablesGlobales.getInstance().getContador());
     }
 
     private void opcionCorrecta(){
@@ -438,7 +439,19 @@ public class crearPregunta extends AppCompatActivity {
     private void uploadAudio() {
         mProgress.setMessage("Uploading Audio...");
         mProgress.show();
-        final StorageReference filepath = mStorageRef.child("audio/").child("new_audio.mp3");
+
+        //Generando un nombre unico para el audio
+
+        char n;
+        Random rnd = new Random();
+        String cadena = new String();
+        for (int i=0; i < 10 ; i++) {
+            n = (char)(rnd.nextDouble() * 26.0 + 65.0 );
+            cadena += n; }
+        cadena = cadena + ".mp3";
+        //FIN
+
+        final StorageReference filepath = mStorageRef.child("audio/").child(cadena);
         Uri uri = Uri.fromFile(new File(fileName));
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -503,7 +516,18 @@ public class crearPregunta extends AppCompatActivity {
         mProgress.setMessage("Uploading Video...");
         mProgress.show();
 
-        final StorageReference filepath = mStorageRef.child("video/").child("new_video.mp4");
+        //Generando un nombre unico para el audio
+
+        char n;
+        Random rnd = new Random();
+        String cadena = new String();
+        for (int i=0; i < 10 ; i++) {
+            n = (char)(rnd.nextDouble() * 26.0 + 65.0 );
+            cadena += n; }
+        cadena = cadena + ".mp4";
+        //FIN
+
+        final StorageReference filepath = mStorageRef.child("video/").child(cadena);
 
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

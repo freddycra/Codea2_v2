@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Act02 extends AppCompatActivity
@@ -45,6 +46,26 @@ public class Act02 extends AppCompatActivity
 
         // A continuación mi código para OnCreate
         Mensaje("Bienvenido Actividad 02");
+
+        TextView t = (TextView) findViewById(R.id.correoUsuario);
+        t.setText(VariablesGlobales.getInstance().getUsuarioGlobal().getCorreo());
+
+        t = (TextView) findViewById(R.id.nombreUsuario);
+        t.setText(VariablesGlobales.getInstance().getUsuarioGlobal().getNombre());
+
+
+        t = (TextView) findViewById(R.id.apellidoUsuario);
+        t.setText(VariablesGlobales.getInstance().getUsuarioGlobal().getApellido());
+
+        t = (TextView) findViewById(R.id.nickUsuario);
+        t.setText(VariablesGlobales.getInstance().getUsuarioGlobal().getNickname());
+
+        t = (TextView) findViewById(R.id.edadUsuario);
+        t.setText(String.valueOf(VariablesGlobales.getInstance().getUsuarioGlobal().getEdad()));
+
+        t = (TextView) findViewById(R.id.ubicacionCorreo);
+        t.setText(VariablesGlobales.getInstance().getUsuarioGlobal().getUbicacion());
+
 
     } // Fin del Oncreate de la Actividad 02
 
