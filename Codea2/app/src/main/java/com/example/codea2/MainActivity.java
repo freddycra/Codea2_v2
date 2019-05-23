@@ -49,15 +49,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 //TODO validacion si el numero de preguntas es 0
-             Intent intent = new Intent(getApplicationContext(), Preguntas.class);
-             startActivity(intent);
+             startActivity(new Intent(getApplicationContext(), Preguntas.class));
             }
         });
         Cuenta.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
-             Intent intent2 = new Intent(getApplicationContext(), Act02.class);
-             startActivity(intent2);
+             startActivity(new Intent(getApplicationContext(), Act02.class));
             }
         });
         video.setOnClickListener(new View.OnClickListener(){
