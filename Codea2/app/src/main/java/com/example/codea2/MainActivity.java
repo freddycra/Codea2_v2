@@ -14,6 +14,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
         // A continuación mi código para OnCreate
         Mensaje("Codea2 te da la bienvenida.");
 
-        getSupportActionBar().setTitle("Inicio");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
 
         Button Jugar = (Button) findViewById(R.id.jugar);
+        Button Puntajes = (Button) findViewById(R.id.puntajes);
         Button Cuenta = (Button) findViewById(R.id.cuenta);
-        Button video = (Button) findViewById(R.id.video);
         Button mis_preguntas = (Button) findViewById(R.id.mispreguntas);
+        Button video = (Button) findViewById(R.id.video);
 
         Jugar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -53,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
              startActivity(intent);
             }
         });
+
+        Puntajes.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+             Intent intentN = new Intent(getApplicationContext(), Puntajes.class);
+             startActivity(intentN);
+            }
+        });
+
         Cuenta.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
@@ -73,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-            /*ImageView singup = (ImageView) findViewById(R.id.logout);
+            //ImageView singup = (ImageView) findViewById(R.id.logout);
             mAuth = FirebaseAuth.getInstance();
             mAuthListner = new FirebaseAuth.AuthStateListener() {
                 @Override
@@ -85,13 +98,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             };
-            singup.setOnClickListener(new View.OnClickListener() {
+            /*singup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mAuth.signOut();
                 }
             });*/
 
+        getSupportActionBar().setTitle("Inicio - " + mAuth.getCurrentUser().getEmail());
 
     } // Fin del Oncreate de la Actividad 01
 

@@ -275,7 +275,25 @@ public class Preguntas extends AppCompatActivity {
             System.out.println("Puntos: "+puntos);
             leerPregunta();
         }else{
-            // Enviar a FireBase.
+
+            // TODO ver eto // Enviar a FireBase.
+/*
+            VariablesGlobales.getInstance().setContadorPuntaje(VariablesGlobales.getInstance().getContadorPuntaje()+1);
+            Puntaje p = new Puntaje(
+                    String.valueOf(VariablesGlobales.getInstance().getContadorPuntaje()),
+                    18,
+                    "fck@hotmail.com");
+
+            VariablesGlobales.getInstance().getMyRef()
+                    .child("Puntajes")
+                    .child(String.valueOf(VariablesGlobales.getInstance().getContadorPuntaje()))
+                    .setValue(p);
+
+            VariablesGlobales.getInstance().getMyRef()
+                    .child("Puntajes")
+                    .child("cantidadPuntaje")
+                    .setValue(VariablesGlobales.getInstance().getContadorPuntaje());
+*/
             DialogSiNO_01();
         }
     }

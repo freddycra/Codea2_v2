@@ -8,6 +8,7 @@ public class Desarrolladores extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().setTitle("Desarrolladores");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desarrolladores);
