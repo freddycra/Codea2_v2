@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -31,10 +33,19 @@ import java.util.List;
 
 public class Preguntas extends AppCompatActivity {
 
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListner;
     Pregunta pregunta;
     List<Pregunta> listaPreguntas;
     int puntos = 0;
     ProgressDialog pd;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListner);
+    }
 
     //TODO agregar un array con las preguntas que ya se han contestado
     @Override
@@ -61,6 +72,18 @@ public class Preguntas extends AppCompatActivity {
 
         listaPreguntas = new ArrayList();
         leerPreguntasFirebase();
+
+        mAuthListner = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser()==null)
+                {
+                    startActivity(new Intent(Preguntas.this, singin_activity.class));
+                }
+            }
+        };
+
+        mAuth = FirebaseAuth.getInstance();
 
     } // Fin del Oncreate de la Actividad 02
 
@@ -132,6 +155,23 @@ public class Preguntas extends AppCompatActivity {
                 e.printStackTrace();
             }
         }else{ //Se acabaron las preguntas del ArrayList! Game Over.
+
+            VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);
+
+            Puntaje p = new Puntaje(
+                    String.valueOf(VariablesGlobales.getInstance().getContScore()),
+                    puntos,
+                    mAuth.getCurrentUser().getEmail()
+            );
+
+            VariablesGlobales.getInstance().getMyRef().child("puntajes")
+                    .child(String.valueOf(VariablesGlobales.getInstance().getContScore()))
+                    .setValue(p);
+
+            VariablesGlobales.getInstance().getMyRef().child("puntajes")
+                    .child("contScore")
+                    .setValue(VariablesGlobales.getInstance().getContScore());
+
             MensajeOK("FELICIDADES Ha ganado el juego con el puntaje maximo "+String.valueOf(puntos));
             //finish();
         }
@@ -290,6 +330,22 @@ public class Preguntas extends AppCompatActivity {
             tv.setText(String.valueOf(puntos));
             cargarPregunta();
         } else {
+            VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);
+
+            Puntaje p = new Puntaje(
+                    String.valueOf(VariablesGlobales.getInstance().getContScore()),
+                    puntos,
+                    mAuth.getCurrentUser().getEmail()
+                    );
+
+            VariablesGlobales.getInstance().getMyRef().child("puntajes")
+                    .child(String.valueOf(VariablesGlobales.getInstance().getContScore()))
+                    .setValue(p);
+
+            VariablesGlobales.getInstance().getMyRef().child("puntajes")
+                    .child("contScore")
+                    .setValue(VariablesGlobales.getInstance().getContScore());
+
             DialogSiNO_01();
         }
     }

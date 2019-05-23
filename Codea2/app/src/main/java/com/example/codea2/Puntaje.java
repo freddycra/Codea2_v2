@@ -2,10 +2,16 @@ package com.example.codea2;
 
 public class Puntaje {
     String id;
-    int puntaje;
+    long puntaje;
     String email_Usuario;
 
-    public Puntaje(String id, int puntaje, String email_Usuario) {
+    public Puntaje(){
+        this.id = "indefinido";
+        this.puntaje = 0;
+        this.email_Usuario = "indefinido";
+    }
+
+    public Puntaje(String id, long puntaje, String email_Usuario) {
         this.id = id;
         this.puntaje = puntaje;
         this.email_Usuario = email_Usuario;
@@ -15,7 +21,7 @@ public class Puntaje {
         return id;
     }
 
-    public int getPuntaje() {
+    public long getPuntaje() {
         return puntaje;
     }
 
@@ -23,7 +29,7 @@ public class Puntaje {
         this.id = id;
     }
 
-    public void setPuntaje(int puntaje) {
+    public void setPuntaje(long puntaje) {
         this.puntaje = puntaje;
     }
 
