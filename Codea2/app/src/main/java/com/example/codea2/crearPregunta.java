@@ -154,6 +154,7 @@ public class crearPregunta extends AppCompatActivity {
         p.setPregunta(pregunta);
         p.setResputesta(respuesta);
         p.setOpciones(opciones);
+        p.setReportes(0);
         VariablesGlobales.getInstance().getMyRef().child("preguntas").child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(p);//Acá se llama al contador de preguntas.......
         VariablesGlobales.getInstance().getMyRef().child("preguntas").child("cantidad").setValue(VariablesGlobales.getInstance().getContador());
     }

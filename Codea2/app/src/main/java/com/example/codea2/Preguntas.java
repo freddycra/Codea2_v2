@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,6 +60,22 @@ public class Preguntas extends AppCompatActivity {
 
         listaPreguntas = new ArrayList();
         leerPreguntasFirebase();
+
+        ImageView report = (ImageView) findViewById(R.id.ivReport);
+        report.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                if(pregunta!=null){
+                    if(pregunta.getReportes() < 3){
+                        pregunta.setReportes(pregunta.getReportes()+1);
+                        //se modifica en firebase
+                        VariablesGlobales.getInstance().getMyRef().child("preguntas").child(pregunta.getId()).setValue(pregunta);
+                    }else{
+                        VariablesGlobales.getInstance().getMyRef().child("preguntas").child(pregunta.getId()).removeValue();
+                    }
+                }
+            }
+        });
 
     } // Fin del Oncreate de la Actividad 02
 
@@ -130,8 +147,8 @@ public class Preguntas extends AppCompatActivity {
                 e.printStackTrace();
             }
         }else{ //Se acabaron las preguntas del ArrayList! Game Over.
-            MensajeOK("FELICIDADES Ha ganado el juego con el puntaje maximo "+String.valueOf(puntos));
-            //finish();
+            Mensaje("FELICIDADES Ha ganado el juego con el puntaje maximo "+String.valueOf(puntos));
+            finish();
         }
     }
 
@@ -323,22 +340,8 @@ public class Preguntas extends AppCompatActivity {
         alert11.show();
     }
 
-    ;
-
     public void Mensaje(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
-    public void MensajeOK(String msg){
-        View v1 = getWindow().getDecorView().getRootView();
-        AlertDialog.Builder builder1 = new AlertDialog.Builder( v1.getContext());
-        builder1.setMessage(msg);
-        builder1.setCancelable(true);
-        builder1.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {} });
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
     }
 
 } // [3:47:42 PM] Fin de la Clase Actividad 02
