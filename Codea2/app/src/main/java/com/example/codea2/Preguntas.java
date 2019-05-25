@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,16 @@ public class Preguntas extends AppCompatActivity {
     int puntos = 0;
     ProgressDialog pd;
 
+    final CountDownTimer cdt = new CountDownTimer(11000, 1000) {
+        public void onTick(long millisUntilFinished) {
+            getSupportActionBar().setTitle("PLAY TIME - TIMER: " + millisUntilFinished / 1000 + " - SCORE: " + puntos);
+        }
+        public void onFinish() {
+            Mensaje("Se agotó el tiempo...");
+            verificaRespuesta(false);
+        }
+    }.start();
+
 
     @Override
     protected void onStart() {
@@ -53,7 +64,7 @@ public class Preguntas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
-        getSupportActionBar().setTitle("PLAY TIME");
+        // getSupportActionBar().setTitle("PLAY TIME");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
 
         OnclickDelButton(R.id.r1);
@@ -154,8 +165,13 @@ public class Preguntas extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{ //Se acabaron las preguntas del ArrayList! Game Over.
 
+            // Activamos el timer.
+            cdt.cancel();
+            cdt.start();
+
+        }else{ //Se acabaron las preguntas del ArrayList! Game Over.
+            cdt.cancel();
             VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);
 
             Puntaje p = new Puntaje(
@@ -325,9 +341,9 @@ public class Preguntas extends AppCompatActivity {
 
     public void verificaRespuesta(boolean correcta) {
         if (correcta) {
-            TextView tv = (TextView) findViewById(R.id.TextViewPuntos);
+            // TextView tv = (TextView) findViewById(R.id.TextViewPuntos);
             puntos = puntos + 1;
-            tv.setText(String.valueOf(puntos));
+            // tv.setText(String.valueOf(puntos));
             cargarPregunta();
         } else {
             VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);

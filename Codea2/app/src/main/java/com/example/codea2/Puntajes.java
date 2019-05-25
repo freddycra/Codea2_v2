@@ -1,7 +1,11 @@
 package com.example.codea2;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MicrophoneInfo;
+import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,37 +39,18 @@ public class Puntajes extends AppCompatActivity {
 
         // A continuación mi código para OnCreate
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
-        getSupportActionBar().setTitle("Puntajes más altos");
+        getSupportActionBar().setTitle("*** PUNTAJES HISTÓRICOS ***");
+
         DesplegarPuntajes();
 
-        Button b = (Button) findViewById(R.id.button);
+        /*Button b = (Button) findViewById(R.id.button);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                pAlto.clear();
-                /*try{
-                VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);
-
-                Puntaje p = new Puntaje(String.valueOf(VariablesGlobales.getInstance().getContScore()),
-                        7,
-                        "kristyn.tenorio@gmail.com");
-
-                VariablesGlobales.getInstance().getMyRef().child("puntajes")
-                        .child(String.valueOf(VariablesGlobales.getInstance().getContScore()))
-                        .setValue(p);
-
-                VariablesGlobales.getInstance().getMyRef().child("puntajes")
-                        .child("contScore")
-                        .setValue(VariablesGlobales.getInstance().getContScore());
-
-            }catch (Exception ex){
-                System.out.println(ex.getMessage());
-                MensajeOK("Error: "+ex.getMessage());
-
-            }*/
+                //pAlto.clear();
             }
 
-        });
+        });*/
     }
 
     public void MensajeOK(String msg){
@@ -92,11 +78,10 @@ public class Puntajes extends AppCompatActivity {
                     try {
                         final Puntaje puntaje = postSnapshot.getValue(Puntaje.class);
                          pAlto.add(String.valueOf(contador) +". " + puntaje.getEmail_Usuario() + " - " + String.valueOf(puntaje.getPuntaje()));
-                         //pAlto.add(puntaje.getEmail_Usuario() + " - " + String.valueOf(puntaje.getPuntaje()));
                         contador = contador - 1;
                     }catch (Exception ex){
-                        System.out.println(ex.getMessage());
-                        Mensaje("Error: "+ex.getMessage());
+                        // System.out.println(ex.getMessage());
+                        // Mensaje("Error: "+ex.getMessage());
                         continue;
                     }
                 }
@@ -107,6 +92,7 @@ public class Puntajes extends AppCompatActivity {
             }
         });
     }
+
     void llenar(){
         Collections.reverse(pAlto);
         ArrayAdapter<String> adaptador =new ArrayAdapter(this, android.R.layout.simple_list_item_1, pAlto);
@@ -114,4 +100,5 @@ public class Puntajes extends AppCompatActivity {
         milistview.setAdapter(adaptador);
         // pAlto.clear();
     }
+
 } // [4:42:01 PM] Fin de la Clase Actividad 03
