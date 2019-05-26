@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1abc9c"
+    android:background="@color/Background"
     tools:context=".Preguntas">
 
     <Button
         android:id="@+id/r1"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="356dp"
         android:background="@color/Jugar"
         android:text="RESPUESTA #1"
         android:textColor="@android:color/white"
         android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/r2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/contenedor" />
 
     <Button
         android:id="@+id/r2"
@@ -31,7 +31,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/r3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/r1" />
 
@@ -65,15 +65,14 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/contenedor"
-        android:layout_width="355dp"
-        android:layout_height="260dp"
+        android:layout_width="367dp"
+        android:layout_height="279dp"
         android:background="#ecf0f1"
         app:layout_constraintBottom_toTopOf="@+id/r1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewPregunta"
@@ -83,6 +82,7 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.205"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -124,46 +124,6 @@
             app:srcCompat="@drawable/ic_menu_slideshow" />
     </android.support.constraint.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/TextViewPuntos"
-        android:layout_width="16dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="0"
-        android:textColor="#EC0C13"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/r1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/contenedor"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Puntos:"
-        android:textColor="#F10303"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/r1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.197"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contenedor"
-        app:layout_constraintVertical_bias="0.0" />
-
 
     <Button
         android:id="@+id/reproducirAudio"
@@ -181,10 +141,25 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.164" />
+
+    <ImageView
+        android:id="@+id/ivReport"
+        android:layout_width="44dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/warningreport" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.codea2;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -66,7 +67,8 @@ public class Act02 extends AppCompatActivity
         t = (TextView) findViewById(R.id.ubicacionCorreo);
         t.setText(VariablesGlobales.getInstance().getUsuarioGlobal().getUbicacion());
 
-
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
+        getSupportActionBar().setTitle("Información de Usuario");
     } // Fin del Oncreate de la Actividad 02
 
     public void Mensaje(String msg){Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
@@ -110,17 +112,17 @@ public class Act02 extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.inicio) {
-            // Handle the camera action
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(i);
         } else if (id == R.id.jugar) {
 
         } else if (id == R.id.mi_puntaje) {
-            Mensaje("Módulo en mantenimiento.");
-            //Intent i = new Intent(getApplicationContext(), Puntajes.class);
-            //startActivity(i);
+            Intent i = new Intent(getApplicationContext(), Puntajes.class);
+            startActivity(i);
         } else if (id == R.id.mi_cuenta) {
 
         } else if (id == R.id.mis_preguntas) {
-            Intent i = new Intent(getApplicationContext(), Preguntas.class);
+            Intent i = new Intent(getApplicationContext(), misPreguntas.class);
             startActivity(i);
         } else if (id == R.id.desarrolladores) {
             Intent i = new Intent(getApplicationContext(), Desarrolladores.class);

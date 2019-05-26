@@ -2,7 +2,9 @@ package com.example.codea2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +20,42 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class misPreguntas extends AppCompatActivity {
+
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListner;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListner);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_preguntas);
+
+        mAuthListner = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser()==null)
+                {
+                    startActivity(new Intent(misPreguntas.this, singin_activity.class));
+                }
+            }
+        };
+
+        mAuth = FirebaseAuth.getInstance();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
+        getSupportActionBar().setTitle("Mis Preguntas - " + mAuth.getCurrentUser().getEmail());
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,17 +91,19 @@ public class misPreguntas extends AppCompatActivity {
                         final Pregunta pregunta = postSnapshot.getValue(Pregunta.class);
                         System.out.println(pregunta.getPregunta());
                         linearLayout =  findViewById(R.id.layoutMP);
-                        TextView valueTV = new TextView(getApplicationContext());
-                        valueTV.setText(pregunta.toString());
-                        valueTV.setId(Integer.parseInt(pregunta.getId()));
-                        valueTV.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-                        valueTV.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View arg0) {
-                                DialogSiNO_01(pregunta);
-                            }
-                        });
-                        ((LinearLayout) linearLayout).addView(valueTV);
+                        if(pregunta.getUsuario() == VariablesGlobales.getUsuarioGlobal().getCorreo()) {
+                            TextView valueTV = new TextView(getApplicationContext());
+                            valueTV.setText(pregunta.toString());
+                            valueTV.setId(Integer.parseInt(pregunta.getId()));
+                            valueTV.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                            valueTV.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View arg0) {
+                                    DialogSiNO_01(pregunta);
+                                }
+                            });
+                            ((LinearLayout) linearLayout).addView(valueTV);
+                        }
                     }catch (Exception ex){
                         System.out.println(ex.getMessage());
                         continue;

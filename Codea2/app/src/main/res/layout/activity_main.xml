@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1abc9c"
+    android:background="@color/Background"
     tools:context=".MainActivity">
 
     <Button
@@ -87,11 +87,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mispreguntas" />
 
-    <ImageView
+    <!--ImageView
         android:id="@+id/logout"
         android:layout_width="35dp"
         android:layout_height="66dp"
         app:srcCompat="@drawable/logout"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp" /-->
+
 </android.support.constraint.ConstraintLayout>
