@@ -24,10 +24,6 @@ public class VariablesGlobales {
         return myRef;
     }
 
-    public void setMyRef(DatabaseReference myRef) {
-        this.myRef = myRef;
-    }
-
     public int getContScore() {
         return contScore;
     }

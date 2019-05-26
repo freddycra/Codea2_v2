@@ -96,12 +96,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             };
-            /*singup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mAuth.signOut();
-                }
-            });*/
 
         getSupportActionBar().setTitle("Inicio - " + mAuth.getCurrentUser().getEmail());
 
