@@ -472,6 +472,7 @@ public class Preguntas extends AppCompatActivity {
                         } else {
                             VariablesGlobales.getInstance().getMyRef().child("preguntas").child(pregunta.getId()).removeValue();
                             VariablesGlobales.getInstance().setContador(VariablesGlobales.getInstance().getContador() - 1);
+                            Mensaje("Gracias por su reporte! Ha obtenido un chance para volver a jugar de nuevo!");
                         }
                         finish(); //cambiar por una pregunta nueva
                     }
