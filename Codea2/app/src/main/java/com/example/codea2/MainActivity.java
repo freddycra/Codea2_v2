@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        int hasWriteContactsPermission1 = checkSelfPermission(Manifest.permission.CAMERA);
-//        if (hasWriteContactsPermission1 != PackageManager.PERMISSION_GRANTED) {
-//            requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                    REQUEST_CODE_ASK_PERMISSIONS);
-//        }
+        int hasWriteContactsPermission1 = checkSelfPermission(Manifest.permission.CAMERA);
+        if (hasWriteContactsPermission1 != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+        }
 
         // A continuación mi código para OnCreate
         Mensaje("Codea2 te da la bienvenida.");

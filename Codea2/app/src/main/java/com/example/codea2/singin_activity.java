@@ -71,11 +71,11 @@ public class singin_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        int hasWriteContactsPermission1 = checkSelfPermission(Manifest.permission.CAMERA);
-//        if (hasWriteContactsPermission1 != PackageManager.PERMISSION_GRANTED) {
-//            requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                    REQUEST_CODE_ASK_PERMISSIONS);
-//        }
+        int hasWriteContactsPermission1 = checkSelfPermission(Manifest.permission.CAMERA);
+        if (hasWriteContactsPermission1 != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+        }
 
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
