@@ -41,7 +41,7 @@ public class Puntajes extends AppCompatActivity {
 
         // A continuación mi código para OnCreate
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
-        getSupportActionBar().setTitle("*** PUNTAJES HISTÓRICOS ***");
+        getSupportActionBar().setTitle("*** MI HISTORIAL DE PUNTAJES ***");
 
         DesplegarPuntajes();
 
@@ -99,8 +99,10 @@ public class Puntajes extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     try {
                         final Puntaje puntaje = postSnapshot.getValue(Puntaje.class);
-                         pAlto.add(String.valueOf(contador) +". " + puntaje.getEmail_Usuario() + " - " + String.valueOf(puntaje.getPuntaje()));
-                        contador = contador - 1;
+                        if(puntaje.getEmail_Usuario().equals(VariablesGlobales.getUsuarioGlobal().getCorreo())) {
+                            pAlto.add(String.valueOf(contador) + ". " + puntaje.getEmail_Usuario() + " - " + String.valueOf(puntaje.getPuntaje()));
+                            contador = contador - 1;
+                        }
                     }catch (Exception ex){
                         // System.out.println(ex.getMessage());
                         // Mensaje("Error: "+ex.getMessage());
