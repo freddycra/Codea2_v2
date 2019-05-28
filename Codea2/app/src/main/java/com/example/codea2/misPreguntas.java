@@ -91,7 +91,7 @@ public class misPreguntas extends AppCompatActivity {
                         final Pregunta pregunta = postSnapshot.getValue(Pregunta.class);
                         System.out.println(pregunta.getPregunta());
                         linearLayout =  findViewById(R.id.layoutMP);
-                        if(pregunta.getUsuario() == VariablesGlobales.getUsuarioGlobal().getCorreo()) {
+                        if(pregunta.getUsuario().equals(VariablesGlobales.getUsuarioGlobal().getCorreo())) {
                             TextView valueTV = new TextView(getApplicationContext());
                             valueTV.setText(pregunta.toString());
                             valueTV.setId(Integer.parseInt(pregunta.getId()));

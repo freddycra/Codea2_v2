@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -39,26 +40,31 @@ public class Preguntas extends AppCompatActivity {
     Pregunta pregunta;
     List<Pregunta> listaPreguntas;
     int puntos = 0;
-    ProgressDialog pd;
-
     final CountDownTimer cdt = new CountDownTimer(22000, 1000) {
         public void onTick(long millisUntilFinished) {
             getSupportActionBar().setTitle("PLAY TIME - TIMER: " + millisUntilFinished / 1000 + " - SCORE: " + puntos);
         }
+
         public void onFinish() {
             try {
                 DialogSiNO_01("Se agotó el tiempo...");
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
     }.start();
-
+    ProgressDialog pd;
 
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListner);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //moveTaskToBack(true);
+        DialogSiNO_03();
     }
 
     //TODO agregar un array con las preguntas que ya se han contestado
@@ -84,14 +90,11 @@ public class Preguntas extends AppCompatActivity {
         ImageView MiImageView = (ImageView) findViewById(R.id.volverRepreoducir);
         MiImageView.setVisibility(MiImageView.INVISIBLE);
 
-        listaPreguntas = new ArrayList();
-        leerPreguntasFirebase();
-
         ImageView report = (ImageView) findViewById(R.id.ivReport);
-        report.setOnClickListener(new View.OnClickListener(){
+        report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if(pregunta!=null){
+                if (pregunta != null) {
                     DialogSiNO_02();
                 }
             }
@@ -100,14 +103,22 @@ public class Preguntas extends AppCompatActivity {
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser()==null)
-                {
+                if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(Preguntas.this, singin_activity.class));
                 }
             }
         };
 
         mAuth = FirebaseAuth.getInstance();
+
+        listaPreguntas = new ArrayList();
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("sesionprevia", MODE_PRIVATE);
+        String usuario = prefs.getString("usuario", "none");
+        if (usuario.equals(VariablesGlobales.getUsuarioGlobal().getCorreo())) {
+            DialogSiNO_04();
+        } else {
+            leerPreguntasFirebase();
+        }
 
     } // Fin del Oncreate de la Actividad 02
 
@@ -152,8 +163,8 @@ public class Preguntas extends AppCompatActivity {
 
     public void leerPregunta() {
 
-        if(listaPreguntas.size()>0) {
-            pregunta = listaPreguntas.remove(listaPreguntas.size()-1);
+        if (listaPreguntas.size() > 0) {
+            pregunta = listaPreguntas.remove(listaPreguntas.size() - 1);
             TextView Mi_textview = (TextView) findViewById(R.id.textViewPregunta);
             Mi_textview.setText(pregunta.getPregunta());
             Mi_textview.bringToFront();
@@ -184,9 +195,9 @@ public class Preguntas extends AppCompatActivity {
             cdt.cancel();
             cdt.start();
 
-        }else{ //Se acabaron las preguntas del ArrayList! Game Over.
+        } else { //Se acabaron las preguntas del ArrayList! Game Over.
             cdt.cancel();
-            VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);
+            VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore() + 1);
 
             Puntaje p = new Puntaje(
                     String.valueOf(VariablesGlobales.getInstance().getContScore()),
@@ -202,7 +213,7 @@ public class Preguntas extends AppCompatActivity {
                     .child("contScore")
                     .setValue(VariablesGlobales.getInstance().getContScore());
 
-            DialogSiNO_01("FELICIDADES Ha ganado el juego con el puntaje maximo "+String.valueOf(puntos)+" pts ");
+            DialogSiNO_01("FELICIDADES Ha ganado el juego con el puntaje maximo " + String.valueOf(puntos) + " pts ");
 
         }
     }
@@ -358,13 +369,13 @@ public class Preguntas extends AppCompatActivity {
             puntos = puntos + 1;
             cargarPregunta();
         } else {
-            VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore()+1);
+            VariablesGlobales.getInstance().setContScore(VariablesGlobales.getInstance().getContScore() + 1);
 
             Puntaje p = new Puntaje(
                     String.valueOf(VariablesGlobales.getInstance().getContScore()),
                     puntos,
                     mAuth.getCurrentUser().getEmail()
-                    );
+            );
 
             VariablesGlobales.getInstance().getMyRef().child("puntajes")
                     .child(String.valueOf(VariablesGlobales.getInstance().getContScore()))
@@ -443,14 +454,14 @@ public class Preguntas extends AppCompatActivity {
         builder1.setPositiveButton("Si",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if(pregunta.getReportes() < 3){
-                            pregunta.setReportes(pregunta.getReportes()+1);
+                        if (pregunta.getReportes() < 3) {
+                            pregunta.setReportes(pregunta.getReportes() + 1);
                             //se modifica en firebase
                             VariablesGlobales.getInstance().getMyRef().child("preguntas").child(pregunta.getId()).setValue(pregunta);
 
-                        }else{
+                        } else {
                             VariablesGlobales.getInstance().getMyRef().child("preguntas").child(pregunta.getId()).removeValue();
-                            VariablesGlobales.getInstance().setContador(VariablesGlobales.getInstance().getContador()-1);
+                            VariablesGlobales.getInstance().setContador(VariablesGlobales.getInstance().getContador() - 1);
                         }
                         finish(); //cambiar por una pregunta nueva
                     }
@@ -458,6 +469,79 @@ public class Preguntas extends AppCompatActivity {
         builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    public void DialogSiNO_03() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Desea guardar la partida actual");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("Si",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("sesionprevia", MODE_PRIVATE).edit();
+                        String preguntas = pregunta.getId()+"-";
+                        for (Pregunta p : listaPreguntas) {
+                            preguntas += p.getId() + "-";
+                        }
+                        editor.putString("usuario", VariablesGlobales.getUsuarioGlobal().getCorreo());
+                        editor.putString("ids", preguntas);
+                        editor.commit();
+                        finish();
+                    }
+                });
+        builder1.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    public void DialogSiNO_04() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Hay una partida guardada, desea recuperarla?");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("Si",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        VariablesGlobales.getInstance().getMyRef().child("preguntas").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                SharedPreferences prefs = getApplicationContext().getSharedPreferences("sesionprevia", MODE_PRIVATE);
+                                try {
+                                    String ids = prefs.getString("ids", "");
+                                    String[] listaIds = ids.split("-");
+                                    for (int i = 0; i < listaIds.length; i++) {
+
+                                        Mensaje(listaIds[i]);
+                                        Pregunta p = dataSnapshot.child(listaIds[i]).getValue(Pregunta.class);
+                                        listaPreguntas.add(p);
+
+                                    }
+                                    cargarPregunta(); //Se lee una nueva pregunta
+                                } catch (Exception ex) {
+                                    System.err.println(ex.getMessage());
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+
+                    }
+                });
+        builder1.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        leerPreguntasFirebase();
                     }
                 });
         AlertDialog alert11 = builder1.create();
