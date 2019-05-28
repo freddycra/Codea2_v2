@@ -48,6 +48,8 @@ public class Preguntas extends AppCompatActivity {
         public void onFinish() {
             try {
                 DialogSiNO_01("Se agotó el tiempo...");
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("sesionprevia", getApplicationContext().MODE_PRIVATE);
+                settings.edit().clear().commit();
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -323,7 +325,9 @@ public class Preguntas extends AppCompatActivity {
                             Mensaje("Respuesta Correcta");
                         } else {
                             verificaRespuesta(false);
-                            Mensaje("Mala tontin");
+                            Mensaje("Respuesta Incorrecta");
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("sesionprevia", getApplicationContext().MODE_PRIVATE);
+                            settings.edit().clear().commit();
                         }
 
                         break;
@@ -334,7 +338,9 @@ public class Preguntas extends AppCompatActivity {
                             Mensaje("Respuesta Correcta");
                         } else {
                             verificaRespuesta(false);
-                            Mensaje("Mala tontin");
+                            Mensaje("Respuesta Incorrecta");
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("sesionprevia", getApplicationContext().MODE_PRIVATE);
+                            settings.edit().clear().commit();
                         }
                         break;
 
@@ -344,7 +350,9 @@ public class Preguntas extends AppCompatActivity {
                             Mensaje("Respuesta Correcta");
                         } else {
                             verificaRespuesta(false);
-                            Mensaje("Mala tontin");
+                            Mensaje("Respuesta Incorrecta");
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("sesionprevia", getApplicationContext().MODE_PRIVATE);
+                            settings.edit().clear().commit();
                         }
                         break;
 
@@ -354,7 +362,9 @@ public class Preguntas extends AppCompatActivity {
                             Mensaje("Respuesta Correcta");
                         } else {
                             verificaRespuesta(false);
-                            Mensaje("Mala tontin");
+                            Mensaje("Respuesta incorrecta");
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("sesionprevia", getApplicationContext().MODE_PRIVATE);
+                            settings.edit().clear().commit();
                         }
                         break;
                     default:
@@ -435,7 +445,7 @@ public class Preguntas extends AppCompatActivity {
         builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Mensaje("END GAME");
+                        Mensaje("GAME OVER");
                         finish();
                     }
                 });
@@ -521,7 +531,6 @@ public class Preguntas extends AppCompatActivity {
                                     String[] listaIds = ids.split("-");
                                     for (int i = 0; i < listaIds.length; i++) {
 
-                                        Mensaje(listaIds[i]);
                                         Pregunta p = dataSnapshot.child(listaIds[i]).getValue(Pregunta.class);
                                         listaPreguntas.add(p);
 
@@ -543,6 +552,8 @@ public class Preguntas extends AppCompatActivity {
         builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences settings = getApplicationContext().getSharedPreferences("sesionprevia", getApplicationContext().MODE_PRIVATE);
+                        settings.edit().clear().commit();
                         leerPreguntasFirebase();
                     }
                 });
