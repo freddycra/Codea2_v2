@@ -84,13 +84,14 @@ public class misPreguntas extends AppCompatActivity {
         VariablesGlobales.getInstance().getMyRef().child("preguntas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                View linearLayout;
+                View linearLayout =  findViewById(R.id.layoutMP);
+                ((LinearLayout) linearLayout).removeAllViews();
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     try {
                         final Pregunta pregunta = postSnapshot.getValue(Pregunta.class);
                         System.out.println(pregunta.getPregunta());
-                        linearLayout =  findViewById(R.id.layoutMP);
+//                        linearLayout =  findViewById(R.id.layoutMP);
                         if(pregunta.getUsuario().equals(VariablesGlobales.getUsuarioGlobal().getCorreo())) {
                             TextView valueTV = new TextView(getApplicationContext());
                             valueTV.setText(pregunta.toString());
@@ -124,12 +125,15 @@ public class misPreguntas extends AppCompatActivity {
         builder1.setCancelable(true);
         builder1.setPositiveButton("Si",
                 new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {startActivity(new Intent(getApplicationContext(), EditarPregunta.class)); } });
+                    public void onClick(DialogInterface dialog, int id) {startActivity(new Intent(getApplicationContext(), EditarPregunta.class));
+                    DesplegarMisPreguntas();
+                    } });
         builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {VariablesGlobales.getInstance().setAuxPregunta(null); } });
         AlertDialog alert11 = builder1.create();
         alert11.show();
+
     }
 
     public void Mensaje(String msg){Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
