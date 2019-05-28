@@ -1,9 +1,15 @@
 package com.example.codea2;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,6 +55,8 @@ public class singin_activity extends AppCompatActivity {
     private Usuario recibido;
     private String nickname;
 
+    private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
     @Override
     protected void onStart() {
 
@@ -58,10 +66,19 @@ public class singin_activity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        int hasWriteContactsPermission1 = checkSelfPermission(Manifest.permission.CAMERA);
+        if (hasWriteContactsPermission1 != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+        }
+
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
         mAuth = FirebaseAuth.getInstance();
 
         u = new Usuario();
@@ -192,6 +209,7 @@ public class singin_activity extends AppCompatActivity {
 
 
     }
+
 
 
     private void signIn() {

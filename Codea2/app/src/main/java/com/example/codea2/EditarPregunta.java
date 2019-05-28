@@ -1,5 +1,6 @@
 package com.example.codea2;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,8 @@ public class EditarPregunta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_pregunta);
 
-
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
+        getSupportActionBar().setTitle("Editar Pregunta");
 
         Pregunta p = VariablesGlobales.getInstance().getAuxPregunta();
         if(p != null) {

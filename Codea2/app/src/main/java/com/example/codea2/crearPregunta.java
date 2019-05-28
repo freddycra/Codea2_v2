@@ -3,6 +3,7 @@ package com.example.codea2;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -75,6 +76,9 @@ public class crearPregunta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_pregunta);
 
+        getSupportActionBar().setTitle("Crear Pregunta");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Background)));
+
         numeroOpciones();
         opcionCorrecta();
         botonCrear();
@@ -132,7 +136,6 @@ public class crearPregunta extends AppCompatActivity {
                 }
 
                 //Se aumenta el ID de la pregunta
-                //Se puede hacer poniendo un documento la cantidad de preguntas
                 VariablesGlobales.getInstance().setContador(VariablesGlobales.getInstance().getContador()+1);
 
                 //Se crea la pregunta
@@ -154,6 +157,8 @@ public class crearPregunta extends AppCompatActivity {
         p.setPregunta(pregunta);
         p.setResputesta(respuesta);
         p.setOpciones(opciones);
+        p.setReportes(0);
+        p.setUsuario(VariablesGlobales.getUsuarioGlobal().getCorreo());
         VariablesGlobales.getInstance().getMyRef().child("preguntas").child(String.valueOf(VariablesGlobales.getInstance().getContador())).setValue(p);//Acá se llama al contador de preguntas.......
         VariablesGlobales.getInstance().getMyRef().child("preguntas").child("cantidad").setValue(VariablesGlobales.getInstance().getContador());
     }
@@ -307,9 +312,6 @@ public class crearPregunta extends AppCompatActivity {
 
     public void Mensaje(String msg){
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
-
-
-
 
     // MULTIMEDIAS MULTIMEDIAS MULTIMEDIAS
 

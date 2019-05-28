@@ -8,17 +8,20 @@ public class Pregunta {
     private String resputesta;
     private int tipo; // 0-Nada 1-Imagen 2-Audio 3-Video
     private String url;
-    //TODO agregar datos del jugador
+    private String usuario;
+    private int reportes;
     private List<Opcion> opciones;
 
     Pregunta(){}
 
-    Pregunta(String id, String pregunta, String respuesta, int tipo, String url, List opciones){
+    Pregunta(String id, String pregunta, String respuesta, int tipo, String url,String usuario, int reportes, List opciones){
         this.id = id;
         this.pregunta= pregunta;
         this.resputesta = respuesta;
         this.tipo = tipo;
         this.url = url;
+        this.usuario = usuario;
+        this.reportes = reportes;
         this.opciones = opciones;
     }
 
@@ -68,6 +71,22 @@ public class Pregunta {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(int reportes) {
+        this.reportes = reportes;
     }
 
     @Override
