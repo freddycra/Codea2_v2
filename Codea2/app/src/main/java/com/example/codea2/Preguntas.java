@@ -489,6 +489,7 @@ public class Preguntas extends AppCompatActivity {
                         }
                         editor.putString("usuario", VariablesGlobales.getUsuarioGlobal().getCorreo());
                         editor.putString("ids", preguntas);
+                        editor.putInt("pts",puntos);
                         editor.commit();
                         finish();
                     }
@@ -516,6 +517,7 @@ public class Preguntas extends AppCompatActivity {
                                 SharedPreferences prefs = getApplicationContext().getSharedPreferences("sesionprevia", MODE_PRIVATE);
                                 try {
                                     String ids = prefs.getString("ids", "");
+                                    puntos = prefs.getInt("pts", 0);
                                     String[] listaIds = ids.split("-");
                                     for (int i = 0; i < listaIds.length; i++) {
 
